@@ -110,4 +110,14 @@ io.on('connection', function (socket) {
 		});
 	});
 
+	socket.on('play', function (payload) {
+		console.log("Play")
+		hyperdeck.play()
+	})
+	socket.on('stop', function (payload) {
+		console.log("Stop")
+		hyperdeck.stop()
+	})
+
+
 });

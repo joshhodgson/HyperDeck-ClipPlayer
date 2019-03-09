@@ -28,6 +28,14 @@
             console.log("playClip " + id)
             socket.emit('playClip', id)
         }
+        function play() {
+            console.log("play")
+            socket.emit('playClip')
+        }
+        function stop() {
+            console.log("stop")
+            socket.emit('stop')
+        }
 
         socket.emit('getClips')
         //setInterval(function () {
@@ -61,15 +69,21 @@
 
 
 
-                var newli = document.createElement('LI');
+                var newli = document.createElement('button');
                 newli.innerHTML = 'Go to clip ' + payload[i].name + ' with duration ' + payload[i].duration;
                 newli.onclick = goToClick(clipId)
                 document.getElementById("cliplist").appendChild(newli); // Append <li> to <ul> with id="myList"
-                var newli = document.createElement('LI');
+                    document.getElementById("cliplist").innerHTML+= "</br>" // Append <li> to <ul> with id="myList"
+
+                var newli = document.createElement('button');
                 newli.innerHTML = 'PLAY clip ' + payload[i].name + ' with duration ' + payload[i].duration;
                 newli.onclick = playClipClick(clipId)
 
                 document.getElementById("cliplist").appendChild(newli); // Append <li> to <ul> with id="myList"
+                    document.getElementById("cliplist").innerHTML+= "</br>" // Append <li> to <ul> with id="myList"
+
+                    document.getElementById("cliplist").innerHTML+= "</br>" // Append <li> to <ul> with id="myList"
+
 
             }
 
@@ -85,6 +99,7 @@
         <div class="container">
 
             <h1>Welcome!</h1>
+            <button onclick="play()" class="btn btn-success">PLAY!</button> <button onclick="stop()" class="btn btn-danger">STOP!</button></br>
 
             <p>Here's a list of clips on the hyperdeck drive currently loaded</p>
             <!--
