@@ -1,0 +1,109 @@
+<html>
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+        crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
+        crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        function goToClip(id) {
+            console.log("goToClip " + id)
+            socket.emit('goToClip', id)
+        }
+
+        function playClip(id) {
+            console.log("playClip " + id)
+            socket.emit('playClip', id)
+        }
+
+        socket.emit('getClips')
+        //setInterval(function () {
+        // socket.emit('getheat')
+        //}, 10000)
+
+        function goToClick(id) {
+            return function () {
+                console.log("goToClip " + id)
+                socket.emit('goToClip', id)
+            };
+        }
+
+        function playClipClick(id) {
+            return function () {
+                console.log("playClip " + id)
+                socket.emit('playClip', id)
+            };
+        }
+
+        socket.once('clips', function (payload) {
+
+            for (i in payload) {
+                var clip = payload[i]
+                console.log(clip)
+                var clipId = payload[i].id
+
+
+
+
+
+
+
+                var newli = document.createElement('LI');
+                newli.innerHTML = 'Go to clip ' + payload[i].name + ' with duration ' + payload[i].duration;
+                newli.onclick = goToClick(clipId)
+                document.getElementById("cliplist").appendChild(newli); // Append <li> to <ul> with id="myList"
+                var newli = document.createElement('LI');
+                newli.innerHTML = 'PLAY clip ' + payload[i].name + ' with duration ' + payload[i].duration;
+                newli.onclick = playClipClick(clipId)
+
+                document.getElementById("cliplist").appendChild(newli); // Append <li> to <ul> with id="myList"
+
+            }
+
+        })
+    </script>
+
+
+    <title>Title</title>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <div class="container">
+
+            <h1>Welcome!</h1>
+
+            <p>Here's a list of clips on the hyperdeck drive currently loaded</p>
+            <!--
+<ul>
+  <%files.forEach(function(mp4, index){%>
+    <li>
+      <a href="/media/<%=index%>"><%=mp4%></a>
+    </li>
+    <% })%>
+</ul>-->
+            <ul id="cliplist">
+
+            </ul>
+
+
+
+        </div>
+    </div>
+
+</body>
+
+</html>
