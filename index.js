@@ -61,6 +61,9 @@ io.on('connection', function (socket) {
 			console.log(response.params)
 			var clips = []
 			for (i in response.params) {
+				if(i=="clip count"){
+					continue;
+				}
 				clips.push({
 					id: i,
 					name: response.params[i],
