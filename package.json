@@ -1,0 +1,24 @@
+{
+  "name": "hyperdeck-clipplayer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshhodgson/HyperDeck-ClipPlayer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshhodgson/HyperDeck-ClipPlayer/issues"
+  },
+  "homepage": "https://github.com/joshhodgson/HyperDeck-ClipPlayer#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "hyperdeck-js-lib": "^1.6.0",
+    "socket.io": "^2.2.0"
+  }
+}
