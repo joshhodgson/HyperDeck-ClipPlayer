@@ -28,10 +28,12 @@
             console.log("playClip " + id)
             socket.emit('playClip', id)
         }
+
         function play() {
             console.log("play")
             socket.emit('play')
         }
+
         function stop() {
             console.log("stop")
             socket.emit('stop')
@@ -70,19 +72,19 @@
 
 
                 var newli = document.createElement('button');
-                newli.innerHTML = 'Go to clip ' + payload[i].name + ' with duration ' + payload[i].duration;
-                newli.onclick = goToClick(clipId)
-                document.getElementById("cliplist").appendChild(newli); // Append <li> to <ul> with id="myList"
-                    document.getElementById("cliplist").innerHTML+= "</br>" // Append <li> to <ul> with id="myList"
+                var button = '<button onclick="goToClip(' + clipId + ')">Go to clip ' + payload[i].name +
+                    ' with duration ' + payload[i].duration + '</button>'
+                document.getElementById("cliplist").innerHTML += button
 
-                var newli = document.createElement('button');
-                newli.innerHTML = 'PLAY clip ' + payload[i].name + ' with duration ' + payload[i].duration;
-                newli.onclick = playClipClick(clipId)
+                document.getElementById("cliplist").innerHTML += "</br>" // Append <li> to <ul> with id="myList"
 
-                document.getElementById("cliplist").appendChild(newli); // Append <li> to <ul> with id="myList"
-                    document.getElementById("cliplist").innerHTML+= "</br>" // Append <li> to <ul> with id="myList"
+                var button = '<button onclick="playClip(' + clipId + ')">PLAY clip ' + payload[i].name +
+                    ' with duration ' + payload[i].duration + '</button>'
+                document.getElementById("cliplist").innerHTML += button
 
-                    document.getElementById("cliplist").innerHTML+= "</br>" // Append <li> to <ul> with id="myList"
+                document.getElementById("cliplist").innerHTML += "</br>" // Append <li> to <ul> with id="myList"
+
+                document.getElementById("cliplist").innerHTML += "</br>" // Append <li> to <ul> with id="myList"
 
 
             }
